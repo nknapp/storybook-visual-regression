@@ -46,7 +46,7 @@ beforeAll(async () => {
       };
     })
   );
-}, 20000);
+}, 30000);
 
 afterAll(async () => {
   if (webdriverTargets != null) {
