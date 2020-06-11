@@ -14,19 +14,19 @@ Promise.all(ports.map((port) => waitForPort(host, port))).then(
 
 async function waitForPort(host, port) {
   const startTime = Date.now();
-  try {
-    await checkPort(host, port);
-  } catch (error) {
-    if (error.code ==='ENOTFOUND') {
-      throw error;
+  while (Date.now() - startTime < maxWaitTime) {
+    try {
+      await checkPort(host, port);
+      return;
+    } catch (error) {
+      if (error.code ==='ENOTFOUND') {
+        throw error;
+      }
+      console.log(error);
+      await delay(retryInterval)
     }
-    console.log(error);
-    if (Date.now() - startTime > maxWaitTime) {
-      throw error;
-    }
-    await delay(retryInterval)
-    return waitForPort(host, port);
   }
+  console.error(`Stop trying after ${maxWaitTime} ms.`)
 }
 
 async function checkPort(host, port) {
