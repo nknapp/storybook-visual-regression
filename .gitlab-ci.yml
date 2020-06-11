@@ -2,8 +2,12 @@ test:
   image: node:latest
   script:
     - yarn install
-    - SELENIUM_HOST=selenion START_STORYBOOK=true yarn test
+    - DEBUG="child-service:*" SELENIUM_HOST=selenion START_STORYBOOK=true yarn test
+  artifacts:
+    name: snapshots
+    paths:
+      - __image_snapshots__
+    when: on_failure
   services:
     - name: "knappmeier/selenium-with-tunnel"
       alias: selenium
-
