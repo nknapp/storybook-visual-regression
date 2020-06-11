@@ -1,0 +1,9 @@
+multi-service-test:
+  image: node:latest
+  script:
+    - yarn build-storybook
+    - SELENIUM_HOST=selenion START_STORYBOOK=true yarn test
+  services:
+    - name: "knappmeier/selenium-with-tunnel"
+      alias: selenium
+

@@ -1,5 +1,6 @@
 import initStoryshots from "@storybook/addon-storyshots";
 import { createTunnel, closeTunnel } from "../test-utils/reverse-tunnel";
+import { startStorybook, stopStorybook } from "../test-utils/storybook-service";
 const { toMatchImageSnapshot } = require("jest-image-snapshot");
 expect.extend({ toMatchImageSnapshot });
 
@@ -27,11 +28,10 @@ const browsers = [
 ];
 
 let webdriverTargets;
-let chromeClient;
-let firefoxClient;
 
 beforeAll(async () => {
   await createTunnel();
+  await startStorybook();
 
   webdriverTargets = await Promise.all(
     browsers.map(async (browser) => {
@@ -46,19 +46,22 @@ beforeAll(async () => {
       };
     })
   );
-});
+}, 20000);
 
 afterAll(async () => {
-  await Promise.all(
-    webdriverTargets.map(async (webdriverTarget) => {
-      try {
-        webdriverTarget.session.deleteSession();
-      } catch (error) {
-        console.error(error);
-      }
-    })
-  );
+  if (webdriverTargets != null) {
+    await Promise.all(
+        webdriverTargets.map(async (webdriverTarget) => {
+          try {
+            webdriverTarget.session.deleteSession();
+          } catch (error) {
+            console.error(error);
+          }
+        })
+    );
+  }
   await closeTunnel().catch(console.error);
+  await stopStorybook().catch(console.error);
 });
 
 sizes.forEach((size) => {
