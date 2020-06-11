@@ -1,0 +1,2 @@
+chisel_1.5.2_darwin_amd64 filter=lfs diff=lfs merge=lfs -text
+*.png filter=lfs diff=lfs merge=lfs -text

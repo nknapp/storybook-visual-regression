@@ -1,6 +1,86 @@
+# Storybook visual testing 
+
+Rational: 
+* E2E-Testing: Fragile, slow, hard to maintain,
+* Jest-Snapshots: Hard to read, difficult to maintain, don't cover styling
+* Storybook stories cover different component states
+* Why not take screenshot of storybook-stories
+
+Requirements
+* Must work on local-machine
+* Must work in CI/CD
+* Must work in combination of both
+
+##  Existing solutions
+
+* Storyshot
+  * Jest-Snapshots by default
+  * Add-ons for puppeteer, selenium, browserstack etc.
+* Chromatic (paid service)
+* ...
+
+## Self-hosted solution with storyshot
+
+* TBD: How are different input, interaction tested with storyshot
+
+### Puppeteer
+
+* The "font"-problem
+* Only one browser (no IE, no firefox (yet))
+
+## Using Selenium
+
+No interaction, just load a storybook-page an d
+ 
+### Selenium-Server in the infrastructure
+
+* Must be setup and maintained
+* Builds don't work outside this infrastructure
+
+## Selenium as a Service
+
+* Browserstack
+* Saucelabs
+
+(149-300 €/month )
+
+### Docker-compose
+
+Why not use docker-compose to start a selenium-hub with multiple browsers
+
+* How to access storybook-server from Selenium
+  * `host.docker.internal` -> Only on Mac, not in CI/CD
+  * custom network with fixed IPs (may break)
+  * dynamically determine IPs to connect to host
+    * complicated, hard to understand, fragile
+  * All three solutions require the storybook-server to listen to other than 127.0.0.1
+  * All three solutions require different setup in CI/CD and on local computer
+* Access statically compiled storybook, mounted as volume in selenium-containers
+  * Works on local machine (Linux at least)
+  * Does this work on gitlab-ci?
+* Reverse SSH-Tunnel
+  * Seems overengineered, but might just work.
+  * Same setup in local computer and CI/CD
+  * Connection to storybook-server comes from localhost
+  * Packages are available
+    * Docker: panubo/sshd as entrypoint, with ssh-port exposed to docker
+    * npm: `reverse-tunnel-ssh` to start tunnel before running tests
+* Host networking
+  * https://robotninja.com/blog/introduction-using-selenium-docker-containers-end-end-testing/
+  * does not work in CI/CD
+  * Not possible with multiple containers (hub + nodes)
+    
+* Alternative selenium images.
+  * https://github.com/elgalu/docker-selenium
+
+* Internet Explorer
+  * Virtualbox Image, has selenium driver?
+  
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Available Scripts
 
 In the project directory, you can run:
 

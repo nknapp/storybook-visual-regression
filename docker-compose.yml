@@ -1,0 +1,14 @@
+# To execute this docker-compose yml file use `docker-compose -f <file_name> up`
+# Add the `-d` flag at the end for detached execution
+version: "3"
+services:
+  selenium:
+    image: knappmeier/selenium-with-tunnel
+    ports:
+      - 2222:2222
+      - 4444:24444
+      - 5900:25900
+    environment:
+      - SEL_BROWSER_TIMEOUT_SECS=60
+      - MAX_SESSIONS=10
+      - SEL_RELEASE_TIMEOUT_SECS=30
