@@ -17,8 +17,11 @@ jobs:
     strategy:
       matrix:
         node-version: [10.x]
-
+    services:
+      selenium:
+        image: knappmeier/selenium-with-tunnel
     steps:
+    - run: docker logs "${{ job.services.mysql.id }}"
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v1
@@ -27,6 +30,4 @@ jobs:
     - run: yarn install
     - run: node test-utils/wait-for-ports.js selenium 2222 24444
     - run: DEBUG="child-service:*" SELENIUM_HOST=selenium START_STORYBOOK=true yarn test
-    services:
-      selenium:
-        image: knappmeier/selenium-with-tunnel
+
