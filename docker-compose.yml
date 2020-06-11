@@ -6,7 +6,7 @@ services:
     image: knappmeier/selenium-with-tunnel
     ports:
       - 2222:2222
-      - 4444:24444
+      - 24444:24444
       - 5900:25900
     environment:
       - SEL_BROWSER_TIMEOUT_SECS=60

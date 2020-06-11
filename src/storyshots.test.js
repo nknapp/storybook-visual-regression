@@ -39,7 +39,7 @@ beforeAll(async () => {
         browserId: browser.id,
         session: await WebDriver.newSession({
           hostname: "localhost",
-          port: 4444,
+          port: 24444,
           path: "/wd/hub",
           capabilities: browser.capabilities,
         }),

@@ -2,7 +2,7 @@ test:
   image: node:latest
   script:
     - yarn install
-    - node test-utils/wait-for-ports.js selenium 2222 4444
+    - node test-utils/wait-for-ports.js selenium 2222 24444
     - DEBUG="child-service:*" SELENIUM_HOST=selenion START_STORYBOOK=true yarn test
   artifacts:
     name: snapshots
