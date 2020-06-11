@@ -38,7 +38,7 @@ beforeAll(async () => {
       return {
         browserId: browser.id,
         session: await WebDriver.newSession({
-          hostname: "localhost",
+          hostname: process.env.SELENIUM_HOST || "localhost",
           port: 24444,
           path: "/wd/hub",
           capabilities: browser.capabilities,
