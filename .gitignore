@@ -24,3 +24,4 @@ yarn-error.log*
 *.iml
 
 /.idea/
+__diff_output__
