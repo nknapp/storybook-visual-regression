@@ -1,3 +1,10 @@
+# Usage
+
+```bash
+npx storybook -p 6006 -s public &
+yarn test
+```
+
 # Storybook visual testing 
 
 Rational: 
@@ -16,6 +23,7 @@ Requirements
 * Storyshot
   * Jest-Snapshots by default
   * Add-ons for puppeteer, selenium, browserstack etc.
+    * Addons for selenium is broken (does not releaes browsers)
 * Chromatic (paid service)
 * ...
 

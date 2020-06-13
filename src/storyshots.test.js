@@ -78,7 +78,7 @@ sizes.forEach((size) => {
           );
           const screenshotData = await session.takeScreenshot();
           const screenshotBinary = Buffer.from(screenshotData, "base64");
-          const directory = path.join("__image_snapshots__", story.story.id);
+          const directory = path.join("__image_snapshots_selenium__", story.story.id);
           expect(screenshotBinary).toMatchImageSnapshot({
             customSnapshotsDir: directory,
             customSnapshotIdentifier: `${story.story.id}-${size}-${browserId}`,
