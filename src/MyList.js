@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 
 const StListWrapper = styled.div`
@@ -7,11 +7,14 @@ const StListWrapper = styled.div`
 `;
 
 export function MyList({ elements, title }) {
+  const [count, setCount] = useState(0)
+
   if (elements.length === 0) {
     return <StListWrapper><b>The list is empty</b></StListWrapper>;
   }
   return (
-    <StListWrapper>
+    <StListWrapper onClick={() => setCount(count + 1)}>
+      {count}
       <ul>
         {elements.map((element) => (
           <li key={element.name}>{element.name}</li>

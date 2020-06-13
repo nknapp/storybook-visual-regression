@@ -19,6 +19,7 @@ const singleElementList = [
     name: "Test",
   },
 ];
+
 export const SingleElement = () => <MyList elements={singleElementList} />;
 
 const multiElementList = [
