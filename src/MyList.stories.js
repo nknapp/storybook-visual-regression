@@ -1,5 +1,3 @@
-// src/components/Task.stories.js
-
 import React from "react";
 
 import { MyList } from "./MyList";
@@ -31,3 +29,12 @@ const multiElementList = [
   },
 ];
 export const MultiElement = () => <MyList elements={multiElementList} />;
+
+MultiElement.story = {
+  parameters: {
+    async puppeteerTest(page) {
+
+      await page.click('ul.mylist');
+    },
+  },
+};

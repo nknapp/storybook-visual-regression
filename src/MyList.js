@@ -15,7 +15,7 @@ export function MyList({ elements, title }) {
   return (
     <StListWrapper onClick={() => setCount(count + 1)}>
       {count}
-      <ul>
+      <ul className={'mylist'}>
         {elements.map((element) => (
           <li key={element.name}>{element.name}</li>
         ))}
